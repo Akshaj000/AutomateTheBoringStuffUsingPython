@@ -1,3 +1,4 @@
+
 1. What is []?
 
   [] encloses elements of a list
@@ -74,3 +75,4 @@ For the following three questions, let’s say bacon contains the list [3.14, 'c
 
   copy.copy() gives a shallow copy of other datatype. The reference to the value is same as other list. points the variable to existing object
   copy.deepcopy() gives a deep copy of other datatype. New reference is created.
+  
