@@ -43,10 +43,10 @@ class MyZombierandom:
             if choice==1:
                 diceRollResults = zombiedice.roll()
             else:
-                pass
+                break
 
 
-class MyZombietwobrains:
+class Twobrains:
     def __init__(self, name):
         self.name = name
 
@@ -54,39 +54,64 @@ class MyZombietwobrains:
         diceRollResults = zombiedice.roll() # first roll
         brains=0
         while diceRollResults is not None:
-            brains = diceRollResults['brains']
-            if brains == 2:
+            brains += diceRollResults['brains']
+            if brains >= 2:
                 break
             else:
                 diceRollResults = zombiedice.roll()
             
-class MyZombietwoshotguns:
+class Twoshotguns:
     def __init__(self, name):
         self.name = name
 
     def turn(self, gameState):
         diceRollResults = zombiedice.roll() # first roll
-        brains=0
+        shotgun=0
         while diceRollResults is not None:
-            brains = diceRollResults['shotgun']
-            if brains == 2:
+            shotgun += diceRollResults['shotgun']
+            if shotgun >= 2:
                 break
             else:
                 diceRollResults = zombiedice.roll()
 
-class MyZombiedecideonetofour:
+class Decideonetofour:
     def __init__(self, name):
         self.name = name
 
     def turn(self, gameState):
         diceRollResults = zombiedice.roll() # first roll
-        shotguns=0
+        shotgun=0
+        i=0
+        chance = random.randint(0,3)
         while diceRollResults is not None:
-            for i in range(3):
-                shotguns = diceRollResults['shotgun']
-                diceRollResults = zombiedice.roll()
-                if shotguns==4:
+            shotgun += diceRollResults['shotgun']
+            i+=1
+            if(i<=chance):
+                if shotgun>=2:
                     break
+                else:
+                    diceRollResults = zombiedice.roll()
+            else:
+                break
+
+class Stopatshotgunsgbrains:
+    def __init__(self, name):
+        self.name = name
+
+    def turn(self, gameState):
+        diceRollResults = zombiedice.roll() # first roll
+        shotgun=0
+        brains=0
+        chance = random.randint(0,3)
+        while diceRollResults is not None:
+            shotgun += diceRollResults['shotgun']
+            brains += diceRollResults['brains']
+            if(shotgun>=brains):
+                break
+            else:
+                diceRollResults = zombiedice.roll()
+
+
 
 zombies = (
     zombiedice.examples.RandomCoinFlipZombie(name='Random'),
@@ -95,9 +120,11 @@ zombies = (
     zombiedice.examples.MinNumShotgunsThenStopsZombie(name='Stop at 1 Shotgun', minShotguns=1),
     MyZombie(name='My Zombie Bot'),
     MyZombierandom(name='Randombot'),
-    MyZombietwobrains(name="Twobrainbot"),
-    MyZombietwoshotguns(name="Twogunbot"),
-    MyZombiedecideonetofour(name="decide1tofour")
+    Twobrains(name="Twobrainbot"),
+    Twoshotguns(name="Twogunbot"),
+    Decideonetofour(name="decide1tofour"),
+    Stopatshotgunsgbrains(name="Stopshotgun>brains")
+
     # Add any other zombie players here.
 )
 
