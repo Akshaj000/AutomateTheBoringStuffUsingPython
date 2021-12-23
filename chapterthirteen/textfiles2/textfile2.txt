@@ -1,0 +1,557 @@
+1. What are the two values of the Boolean data type? How do you write them?
+
+
+
+   True, False or 1,0
+
+   in python we use True or False with  first letter in uppercase.
+
+ 
+
+2. What are the three Boolean operators?
+
+
+
+   and, or, not
+
+   These are used in boolean expression to return boolean value.
+
+   Eg:
+
+   True or False = True
+
+   True and False = False
+
+   not True = False
+
+   (5>3) and (7<3) = False
+
+   (5>3) or (7<3) = True
+
+   
+
+3. Write out the truth tables of each Boolean operator 
+
+   (that is, every possible combination of Boolean values for the operator and what they evaluate to).
+
+
+
+    And
+
+    
+
+    x | y | x and y
+
+    0 | 0 |    0
+
+    0 | 1 |    0
+
+    1 | 0 |    0
+
+    1 | 1 |    1
+
+    
+
+    Or
+
+    
+
+    x | y | x or y
+
+    0 | 0 |    0
+
+    0 | 1 |    1
+
+    1 | 0 |    1
+
+    1 | 1 |    1
+
+    
+
+    Not
+
+    
+
+    x | !x
+
+    0 |  1
+
+    1 |  0
+
+    
+
+4. What do the following expressions evaluate to?
+
+
+
+   (5 > 4) and (3 == 5)  = True and False = False
+
+   not (5 > 4)  = not True = False
+
+   (5 > 4) or (3 == 5) = True or False = True
+
+   not ((5 > 4) or (3 == 5))  = not (True or False) = not True = False
+
+   (True and True) and (True == False)  = True and False = False
+
+   (not False) or (not True)  = True or False = True
+
+   
+
+5. What are the six comparison operators?
+
+
+
+   ==   is equal to
+
+   !=   is not equal to
+
+   <    is less than
+
+   >    is greater than
+
+   <=   is less than or equal to
+
+   >=   is greater than or equal to
+
+   
+
+6. What is the difference between the equal to operator and the assignment operator?
+
+   
+
+   '=' assigns a value to a variable. ex: a = 5
+
+   '==' checks whether two values are equal. ex: 5==5 prints True
+
+   
+
+7. Explain what a condition is and where you would use one.
+
+
+
+   The code make decisions and carry out actions accordingly depending on conditions.
+
+   We use them we need to exectute some code depending on some condition.
+
+   ex:
+
+   if (a>b):
+
+       print("a is larger") 
+
+   
+
+8. Identify the three blocks in this code:
+
+
+
+   1.spam = 0
+
+   2.if spam == 10:
+
+   3.    print('eggs')
+
+   4.    if spam > 5:
+
+   5.        print('bacon')
+
+   6.    else:
+
+   7.        print('ham')
+
+   8.    print('spam')
+
+   9.print('spam')
+
+   
+
+   The main code block containing the whole code from line 1 to 9.
+
+   The first if block containg if, else and print statements.
+
+   The if and else block inside the former if block containing print statement.
+
+
+
+9. Write code that prints Hello if 1 is stored in spam, prints Howdy if 2 is stored in spam, 
+
+   and prints Greetings! if anything else is stored in spam. 
+
+   
+
+   spam=int(input())
+
+   if spam==1:
+
+       print('Hello')
+
+   elif spam==2:
+
+       print('Howdy')
+
+   else:
+
+       print('Greetings!')
+
+         
+
+10. What keys can you press if your program is stuck in an infinite loop?
+
+
+
+    ctrl+c
+
+    
+
+11. What is the difference between break and continue?
+
+    
+
+    break is a keyword which breaks or bring the control of program outside the loop.
+
+    continue is a keyword which is used to end  the cureent iteration in a loop and continue to next iteration.
+
+
+
+12. What is the difference between range(10), range(0, 10), and range(0, 10, 1) in a for loop?
+
+    
+
+    for i in range(init,final,step)
+
+    
+
+    for i in range(10)      only final value is specified. Initial value is set to 0 and step value is set to 1  as default 
+
+    for i in range(0,10)    Initial  val and final val is specified. step val is set to 1 as deafult.
+
+    for i in range(1,10,1)
+
+    In all three of the loop i iterates same elements. That is from 0 to 10 , 10 not  included with step value of 1.
+
+    
+
+13. Write a short program that prints the numbers 1 to 10 using a for loop. 
+
+    Then write an equivalent program that prints the numbers 1 to 10 using a while loop.
+
+    
+
+    for i in range(1,11):
+
+         print(i)
+
+        
+
+    i=1
+
+    while(i<=10):
+
+         print(i)
+
+         i+=1
+
+         
+
+14. If you had a function named bacon() inside a module named spam,
+
+    how would you call it after importing spam?
+
+    
+
+    import spam
+
+    spam.bacon()
+
+    
+
+    
+
+15. Look up the round() and abs() functions on the internet, and find out what they do. 
+
+    Experiment with them in the interactive shell.
+
+    
+
+    abs() give absolute value and round() rounds to nearest integer
+
+1. What are the two values of the Boolean data type? How do you write them?
+
+   True, False or 1,0
+   in python we use True or False with  first letter in uppercase.
+ 
+2. What are the three Boolean operators?
+
+   and, or, not
+   These are used in boolean expression to return boolean value.
+   Eg:
+   True or False = True
+   True and False = False
+   not True = False
+   (5>3) and (7<3) = False
+   (5>3) or (7<3) = True
+   
+3. Write out the truth tables of each Boolean operator 
+   (that is, every possible combination of Boolean values for the operator and what they evaluate to).
+
+    And
+    
+    x | y | x and y
+    0 | 0 |    0
+    0 | 1 |    0
+    1 | 0 |    0
+    1 | 1 |    1
+    
+    Or
+    
+    x | y | x or y
+    0 | 0 |    0
+    0 | 1 |    1
+    1 | 0 |    1
+    1 | 1 |    1
+    
+    Not
+    
+    x | !x
+    0 |  1
+    1 |  0
+    
+4. What do the following expressions evaluate to?
+
+   (5 > 4) and (3 == 5)  = True and False = False
+   not (5 > 4)  = not True = False
+   (5 > 4) or (3 == 5) = True or False = True
+   not ((5 > 4) or (3 == 5))  = not (True or False) = not True = False
+   (True and True) and (True == False)  = True and False = False
+   (not False) or (not True)  = True or False = True
+   
+5. What are the six comparison operators?
+
+   ==   is equal to
+   !=   is not equal to
+   <    is less than
+   >    is greater than
+   <=   is less than or equal to
+   >=   is greater than or equal to
+   
+6. What is the difference between the equal to operator and the assignment operator?
+   
+   '=' assigns a value to a variable. ex: a = 5
+   '==' checks whether two values are equal. ex: 5==5 prints True
+   
+7. Explain what a condition is and where you would use one.
+
+   The code make decisions and carry out actions accordingly depending on conditions.
+   We use them we need to exectute some code depending on some condition.
+   ex:
+   if (a>b):
+       print("a is larger") 
+   
+8. Identify the three blocks in this code:
+
+   1.spam = 0
+   2.if spam == 10:
+   3.    print('eggs')
+   4.    if spam > 5:
+   5.        print('bacon')
+   6.    else:
+   7.        print('ham')
+   8.    print('spam')
+   9.print('spam')
+   
+   The main code block containing the whole code from line 1 to 9.
+   The first if block containg if, else and print statements.
+   The if and else block inside the former if block containing print statement.
+
+9. Write code that prints Hello if 1 is stored in spam, prints Howdy if 2 is stored in spam, 
+   and prints Greetings! if anything else is stored in spam. 
+   
+   spam=int(input())
+   if spam==1:
+       print('Hello')
+   elif spam==2:
+       print('Howdy')
+   else:
+       print('Greetings!')
+         
+10. What keys can you press if your program is stuck in an infinite loop?
+
+    ctrl+c
+    
+11. What is the difference between break and continue?
+    
+    break is a keyword which breaks or bring the control of program outside the loop.
+    continue is a keyword which is used to end  the cureent iteration in a loop and continue to next iteration.
+
+12. What is the difference between range(10), range(0, 10), and range(0, 10, 1) in a for loop?
+    
+    for i in range(init,final,step)
+    
+    for i in range(10)      only final value is specified. Initial value is set to 0 and step value is set to 1  as default 
+    for i in range(0,10)    Initial  val and final val is specified. step val is set to 1 as deafult.
+    for i in range(1,10,1)
+    In all three of the loop i iterates same elements. That is from 0 to 10 , 10 not  included with step value of 1.
+    
+13. Write a short program that prints the numbers 1 to 10 using a for loop. 
+    Then write an equivalent program that prints the numbers 1 to 10 using a while loop.
+    
+    for i in range(1,11):
+         print(i)
+        
+    i=1
+    while(i<=10):
+         print(i)
+         i+=1
+         
+14. If you had a function named bacon() inside a module named spam,
+    how would you call it after importing spam?
+    
+    import spam
+    spam.bacon()
+    
+    
+15. Look up the round() and abs() functions on the internet, and find out what they do. 
+    Experiment with them in the interactive shell.
+    
+    abs() give absolute value and round() rounds to nearest integer
+1. What are the two values of the Boolean data type? How do you write them?
+
+   True, False or 1,0
+   in python we use True or False with  first letter in uppercase.
+ 
+2. What are the three Boolean operators?
+
+   and, or, not
+   These are used in boolean expression to return boolean value.
+   Eg:
+   True or False = True
+   True and False = False
+   not True = False
+   (5>3) and (7<3) = False
+   (5>3) or (7<3) = True
+   
+3. Write out the truth tables of each Boolean operator 
+   (that is, every possible combination of Boolean values for the operator and what they evaluate to).
+
+    And
+    
+    x | y | x and y
+    0 | 0 |    0
+    0 | 1 |    0
+    1 | 0 |    0
+    1 | 1 |    1
+    
+    Or
+    
+    x | y | x or y
+    0 | 0 |    0
+    0 | 1 |    1
+    1 | 0 |    1
+    1 | 1 |    1
+    
+    Not
+    
+    x | !x
+    0 |  1
+    1 |  0
+    
+4. What do the following expressions evaluate to?
+
+   (5 > 4) and (3 == 5)  = True and False = False
+   not (5 > 4)  = not True = False
+   (5 > 4) or (3 == 5) = True or False = True
+   not ((5 > 4) or (3 == 5))  = not (True or False) = not True = False
+   (True and True) and (True == False)  = True and False = False
+   (not False) or (not True)  = True or False = True
+   
+5. What are the six comparison operators?
+
+   ==   is equal to
+   !=   is not equal to
+   <    is less than
+   >    is greater than
+   <=   is less than or equal to
+   >=   is greater than or equal to
+   
+6. What is the difference between the equal to operator and the assignment operator?
+   
+   '=' assigns a value to a variable. ex: a = 5
+   '==' checks whether two values are equal. ex: 5==5 prints True
+   
+7. Explain what a condition is and where you would use one.
+
+   The code make decisions and carry out actions accordingly depending on conditions.
+   We use them we need to exectute some code depending on some condition.
+   ex:
+   if (a>b):
+       print("a is larger") 
+   
+8. Identify the three blocks in this code:
+
+   1.spam = 0
+   2.if spam == 10:
+   3.    print('eggs')
+   4.    if spam > 5:
+   5.        print('bacon')
+   6.    else:
+   7.        print('ham')
+   8.    print('spam')
+   9.print('spam')
+   
+   The main code block containing the whole code from line 1 to 9.
+   The first if block containg if, else and print statements.
+   The if and else block inside the former if block containing print statement.
+
+9. Write code that prints Hello if 1 is stored in spam, prints Howdy if 2 is stored in spam, 
+   and prints Greetings! if anything else is stored in spam. 
+   
+   spam=int(input())
+   if spam==1:
+       print('Hello')
+   elif spam==2:
+       print('Howdy')
+   else:
+       print('Greetings!')
+         
+10. What keys can you press if your program is stuck in an infinite loop?
+
+    ctrl+c
+    
+11. What is the difference between break and continue?
+    
+    break is a keyword which breaks or bring the control of program outside the loop.
+    continue is a keyword which is used to end  the cureent iteration in a loop and continue to next iteration.
+
+12. What is the difference between range(10), range(0, 10), and range(0, 10, 1) in a for loop?
+    
+    for i in range(init,final,step)
+    
+    for i in range(10)      only final value is specified. Initial value is set to 0 and step value is set to 1  as default 
+    for i in range(0,10)    Initial  val and final val is specified. step val is set to 1 as deafult.
+    for i in range(1,10,1)
+    In all three of the loop i iterates same elements. That is from 0 to 10 , 10 not  included with step value of 1.
+    
+13. Write a short program that prints the numbers 1 to 10 using a for loop. 
+    Then write an equivalent program that prints the numbers 1 to 10 using a while loop.
+    
+    for i in range(1,11):
+         print(i)
+        
+    i=1
+    while(i<=10):
+         print(i)
+         i+=1
+         
+14. If you had a function named bacon() inside a module named spam,
+    how would you call it after importing spam?
+    
+    import spam
+    spam.bacon()
+    
+    
+15. Look up the round() and abs() functions on the internet, and find out what they do. 
+    Experiment with them in the interactive shell.
+    
+    abs() give absolute value and round() rounds to nearest integer
+NoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNoneNone
