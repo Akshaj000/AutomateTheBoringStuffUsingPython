@@ -1,0 +1,77 @@
+sending mail from a gmail account
+
+>>> import ezgmail
+>>> ezgmail.send('recipient@example.com', 'Subject line', 'Body of the email')
+
+>>> ezgmail.send('recipient@example.com', 'Subject line', 'Body of the email',['attachment1.jpg', 'attachment2.mp3'])
+
+>>> import ezgmail
+>>> ezgmail.send('recipient@example.com', 'Subject line', 'Body of the email',cc='friend@example.com', bcc='otherfriend@example.com,someoneelse@example.com')
+
+to check email address which token is configured
+
+>>> import ezgmail
+>>> ezgmail.init()
+>>> ezgmail.EMAIL_ADDRESS
+'example@gmail.com'
+
+Reading Mail from a gmail account
+
+>>> import ezgmail
+>>> unreadThreads = ezgmail.unread() # List of GmailThread objects.
+>>> ezgmail.summary(unreadThreads)
+Al, Jon - Do you want to watch RoboCop this weekend? - Dec 09
+Jon - Thanks for stopping me from buying Bitcoin. - Dec 09
+
+>>> len(unreadThreads)
+2
+>>> str(unreadThreads[0])
+"<GmailThread len=2 snippet= Do you want to watch RoboCop this weekend?'>"
+>>> len(unreadThreads[0].messages)
+2
+>>> str(unreadThreads[0].messages[0])
+"<GmailMessage from='Al Sweigart <al@inventwithpython.com>' to='Jon Doe
+<example@gmail.com>' timestamp=datetime.datetime(2018, 12, 9, 13, 28, 48)
+subject='RoboCop' snippet='Do you want to watch RoboCop this weekend?'>"
+>>> unreadThreads[0].messages[0].subject
+'RoboCop'
+>>> unreadThreads[0].messages[0].body
+'Do you want to watch RoboCop this weekend?\r\n'
+>>> unreadThreads[0].messages[0].timestamp
+datetime.datetime(2018, 12, 9, 13, 28, 48)
+>>> unreadThreads[0].messages[0].sender
+'Al Sweigart <al@inventwithpython.com>'
+>>> unreadThreads[0].messages[0].recipient
+'Jon Doe <example@gmail.com>'
+
+>>> recentThreads = ezgmail.recent()
+>>> len(recentThreads)
+25
+>>> recentThreads = ezgmail.recent(maxResults=100)
+>>> len(recentThreads)
+46
+
+
+Searching Mail from a Gmail account
+
+>>> resultThreads = ezgmail.search('RoboCop')
+>>> len(resultThreads)
+1
+>>> ezgmail.summary(resultThreads)
+Al, Jon - Do you want to watch RoboCop this weekend? - Dec 09
+
+'label:UNREAD' For unread emails
+'from:al@inventwithpython.com' For emails from al@inventwithpython.com
+'subject:hello' For emails with “hello” in the subject
+'has:attachment' For emails with file attachments
+
+Downloading attachment from a Gmail account
+
+>>> import ezgmail
+>>> threads = ezgmail.search('vacation photos')
+>>> threads[0].messages[0].attachments
+['tulips.jpg', 'canal.jpg', 'bicycles.jpg']
+>>> threads[0].messages[0].downloadAttachment('tulips.jpg')
+>>> threads[0].messages[0].downloadAllAttachments(downloadFolder='vacat
+ion2019')
+['tulips.jpg', 'canal.jpg', 'bicycles.jpg']

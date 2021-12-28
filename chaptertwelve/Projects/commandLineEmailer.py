@@ -51,7 +51,6 @@ messageElem.click()
 messageElem.send_keys(body)
 
 time.sleep(1)
-
 nextElem = browser.find_element_by_class_name("ms-Button.ms-Button--primary.ms-Button--hasMenu.iconButton.root-242")
 nextElem.click()
 
