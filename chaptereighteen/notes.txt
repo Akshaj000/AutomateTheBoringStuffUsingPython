@@ -65,6 +65,7 @@ Al, Jon - Do you want to watch RoboCop this weekend? - Dec 09
 'subject:hello' For emails with “hello” in the subject
 'has:attachment' For emails with file attachments
 
+
 Downloading attachment from a Gmail account
 
 >>> import ezgmail
@@ -75,3 +76,285 @@ Downloading attachment from a Gmail account
 >>> threads[0].messages[0].downloadAllAttachments(downloadFolder='vacat
 ion2019')
 ['tulips.jpg', 'canal.jpg', 'bicycles.jpg']
+
+<<<<<<sending email using SMTP>>>>>>>
+
+>>> import smtplib
+>>> smtpObj = smtplib.SMTP('smtp.example.com', 587)
+>>> smtpObj.ehlo()
+(250, b'mx.example.com at your service, [216.172.148.131]\nSIZE 35882577\
+n8BITMIME\nSTARTTLS\nENHANCEDSTATUSCODES\nCHUNKING')
+>>> smtpObj.starttls()
+(220, b'2.0.0 Ready to start TLS')
+>>> smtpObj.login('bob@example.com', 'MY_SECRET_PASSWORD')
+(235, b'2.7.0 Accepted')
+>>> smtpObj.sendmail('bob@example.com', 'alice@example.com', 'Subject: So
+long.\nDear Alice, so long and thanks for all the fish. Sincerely, Bob')
+{}
+>>> smtpObj.quit()
+(221, b'2.0.0 closing connection ko10sm23097611pbd.52 - gsmtp')
+
+connecting to an smtp server
+
+Gmail*
+smtp.gmail.com
+
+Outlook.com/Hotmail.com*
+smtp-mail.outlook.com
+
+Yahoo Mail*
+smtp.mail.yahoo.com
+
+AT&T
+smpt.mail.att.net (port 465)
+
+Comcast
+smtp.comcast.net
+
+Verizon
+smtp.verizon.net (port 465)
+
+>>> smtpObj = smtplib.SMTP('smtp.example.com', 587)
+>>> type(smtpObj)
+<class 'smtplib.SMTP'>
+
+sending the smtp "hello" message
+
+>>> smtpObj.ehlo()
+(250, b'mx.example.com at your service, [216.172.148.131]\nSIZE 35882577\
+n8BITMIME\nSTARTTLS\nENHANCEDSTATUSCODES\nCHUNKING')
+
+
+starting tls encryption
+
+>>> smtpObj.starttls()
+(220, b'2.0.0 Ready to start TLS')
+
+logging into the smtp server
+
+>>> smtpObj.login('my_email_address@example.com', 'MY_SECRET_PASSWORD')
+(235, b'2.7.0 Accepted')
+
+sending an email
+
+>>> smtpObj.sendmail('my_email_address@example.com', 'recipient@example.com', 'Subject: So long.\nDear Alice, so long and thanks for all the fish.Sincerely, Bob')
+{}
+
+disconnecting from smtp server
+
+>>> smtpObj.quit()
+(221, b'2.0.0 closing connection ko10sm23097611pbd.52 - gsmtp')
+
+
+<<<<Receiving email using IMAP>>>>>
+
+Retrieving and deleting emails with IMAP
+
+>>> import imapclient
+>>> imapObj = imapclient.IMAPClient('imap.example.com', ssl=True)
+>>> imapObj.login('my_email_address@example.com', 'MY_SECRET_PASSWORD')
+'my_email_address@example.com Jane Doe authenticated (Success)'
+>>> imapObj.select_folder('INBOX', readonly=True)
+>>> UIDs = imapObj.search(['SINCE 05-Jul-2019'])
+>>> UIDs
+[40032, 40033, 40034, 40035, 40036, 40037, 40038, 40039, 40040, 40041]
+>>> rawMessages = imapObj.fetch([40041], ['BODY[]', 'FLAGS'])
+>>> import pyzmail
+>>> message = pyzmail.PyzMessage.factory(rawMessages[40041][b'BODY[]'])
+>>> message.get_subject()
+'Hello!'
+>>> message.get_addresses('from')
+[('Edward Snowden', 'esnowden@nsa.gov')]
+>>> message.get_addresses('to')
+[('Jane Doe', 'jdoe@example.com')]
+>>> message.get_addresses('cc')
+[]
+>>> message.get_addresses('bcc')
+[]
+>>> message.text_part != None
+True
+>>> message.text_part.get_payload().decode(message.text_part.charset)
+'Follow the money.\r\n\r\n-Ed\r\n'
+>>> message.html_part != None
+True
+>>> message.html_part.get_payload().decode(message.html_part.charset)
+'<div dir="ltr"><div>So long, and thanks for all the fish!<br><br></div>-
+Al<br></div>\r\n'
+
+connecting to an IMAP server
+
+Provider
+IMAP server domain name
+
+Gmail*
+imap.gmail.com
+
+Outlook.com/Hotmail.com*
+imap-mail.outlook.com
+
+Yahoo Mail*
+imap.mail.yahoo.com
+
+AT&T
+imap.mail.att.net
+
+Comcast
+imap.comcast.net
+
+Verizon
+incoming.verizon.net
+
+>>> import imapclient
+>>> imapObj = imapclient.IMAPClient('imap.example.com', ssl=True)
+
+Logging into the IMAP server
+
+>>> imapObj.login('my_email_address@example.com', 'MY_SECRET_PASSWORD')
+'my_email_address@example.com Jane Doe authenticated (Success)'
+
+Searching for a email
+    
+    selecting a folder
+
+    >>> import pprint
+    >>> pprint.pprint(imapObj.list_folders())
+    [(('\\HasNoChildren',), '/', 'Drafts'),
+    (('\\HasNoChildren',), '/', 'Filler'),
+    (('\\HasNoChildren',), '/', 'INBOX'),
+    (('\\HasNoChildren',), '/', 'Sent'),
+    --snip--
+    (('\\HasNoChildren', '\\Flagged'), '/', 'Starred'),
+    (('\\HasNoChildren', '\\Trash'), '/', 'Trash')]
+
+>>> imapObj.select_folder('INBOX', readonly=True)
+>>> imapObj.select_folder('INBOX', readonly=False)
+
+Performing search
+
+Search key
+Meaning
+
+'ALL'
+Returns all messages in the folder. You may run into imaplib size limits if you request all the messages in a large folder. See “Size Limits” on page 429.
+
+
+'BEFORE date', 'ON date', 'SINCE date'
+These three search keys return, respectively, messages that were received by the IMAP server before, on, or after the given date. The date must be formatted like 05-Jul-2019. Also, while 'SINCE 05-Jul-2019' will match messages on and after July 5, 'BEFORE 05-Jul-2019' will match only messages before July 5 but not on July 5 itself.
+
+'SUBJECT string', 'BODY string', 'TEXT string'
+Returns messages where string is found in the subject, body, or either, respectively. If string has spaces in it, then enclose it with double quotes: 'TEXT "search with spaces"'.
+
+'FROM string', 'TO string', 'CC string', 'BCC string'
+Returns all messages where string is found in the “from” email address, “to” addresses, “cc” (carbon copy) addresses, or “bcc” (blind carbon copy) addresses, respectively. If there are multiple email addresses in string, then separate them with spaces and enclose them all with double quotes: 'CC "firstcc@example.com secondcc@example.com"'.
+
+'SEEN', 'UNSEEN'
+Returns all messages with and without the \Seen flag, respectively. An email obtains the \Seen flag if it has been accessed with a fetch() method call (described later) or if it is clicked when you’re checking your email in an email program or web browser. It’s more common to say the email has been “read” rather than “seen,” but they mean the same thing.
+
+'ANSWERED', 'UNANSWERED'
+Returns all messages with and without the \Answered flag, respectively. A message obtains the \Answered flag when it is replied to.
+
+'DELETED', 'UNDELETED'
+Returns all messages with and without the \Deleted flag, respectively. Email messages deleted with the delete_messages() method are given the \Deleted flag but are not permanently deleted until the expunge() method is called (see “Deleting Emails” on page 432). Note that some email providers automatically expunge emails.
+
+'DRAFT', 'UNDRAFT'
+Returns all messages with and without the \Draft flag, respectively. Draft messages are usually kept in a separate Drafts folder rather than in the INBOX folder.
+
+'FLAGGED', 'UNFLAGGED'
+Returns all messages with and without the \Flagged flag, respectively. This flag is usually used to mark email messages as “Important” or “Urgent.”
+
+'LARGER N', 'SMALLER N'
+Returns all messages larger or smaller than N bytes, respectively.
+
+'NOT search-key'
+Returns the messages that search-key would not have returned.
+
+'OR search-key1 search-key2'
+Returns the messages that match either the first or second search-key.
+
+
+imapObj.search(['ALL']) Returns every message in the currently selected folder.
+imapObj.search(['ON 05-Jul-2019'])  Returns every message sent on July 5, 2019.
+imapObj.search(['SINCE 01-Jan-2019', 'BEFORE 01-Feb-2019', 'UNSEEN'])  Returns every message sent in January 2019 that is unread. (Note that this means on and after January 1 and up to but not including February 1.
+imapObj.search(['SINCE 01-Jan-2019', 'FROM alice@example.com'])  Returns every message from alice@example.com sent since the start of 2019.
+imapObj.search(['SINCE 01-Jan-2019', 'NOT FROM alice@example.com'])  Returns every message sent from everyone except alice@example.com since the start of 2019.
+imapObj.search(['OR FROM alice@example.com FROM bob@example.com'])  Returns every message ever sent from alice@example.com or bob@example.com.
+
+
+> UIDs = imapObj.search(['SINCE 05-Jul-2019'])
+>>> UIDs
+[40032, 40033, 40034, 40035, 40036, 40037, 40038, 40039, 40040, 40041]
+
+size limits
+
+>>> import imaplib
+>>> imaplib._MAXLINE = 10000000 -> to change size limits
+
+
+Fetching an Email and Marking It as Read
+
+>>> rawMessages = imapObj.fetch(UIDs, ['BODY[]'])
+>>> import pprint
+>>> pprint.pprint(rawMessages)
+{40040: {'BODY[]': 'Delivered-To: my_email_address@example.com\r\n'
+                   'Received: by 10.76.71.167 with SMTP id '
+--snip--
+                   '\r\n'
+                   '------=_Part_6000970_707736290.1404819487066--\r\n',
+         'SEQ': 5430}}
+
+
+Getting th body from a raw message
+
+>>> message.text_part != None
+True
+>>> message.text_part.get_payload().decode(message.text_part.charset)
+'So long, and thanks for all the fish!\r\n\r\n-Al\r\n'
+>>> message.html_part != None
+True
+>>> message.html_part.get_payload().decode(message.html_part.charset)
+'<div dir="ltr"><div>So long, and thanks for all the fish!<br><br></div>-Al
+<br></div>\r\n'
+
+Deleting Emails”
+
+>>> imapObj.select_folder('INBOX', readonly=False)
+>>> UIDs = imapObj.search(['ON 09-Jul-2019'])
+>>> UIDs
+[40066]
+>>> imapObj.delete_messages(UIDs)
+{40066: ('\\Seen', '\\Deleted')}
+>>> imapObj.expunge()
+('Success', [(5452, 'EXISTS')])
+
+disconnecting from the IMAP Server
+
+>>> imapObj.logout()
+
+Sending text messages with twilio
+
+>>> from twilio.rest import Client
+>>> accountSID = 'ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+>>> authToken  = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+>>> twilioCli = Client(accountSID, authToken)
+>>> myTwilioNumber = '+14955551234'
+>>> myCellPhone = '+14955558888'
+>>> message = twilioCli.messages.create(body='Mr. Watson - Come here - I want to see you.', from_=myTwilioNumber, to=myCellPhone)
+>>> message.to
+'+14955558888'
+>>> message.from_
+'+14955551234'
+>>> message.body
+'Mr. Watson - Come here - I want to see you.'
+>>> message.status
+'queued'
+>>> message.date_created
+datetime.datetime(2019, 7, 8, 1, 36, 18)
+>>> message.date_sent == None
+True
+>>> message.sid
+'SM09520de7639ba3af137c6fcb7c5f4b51'
+>>> updatedMessage = twilioCli.messages.get(message.sid)
+>>> updatedMessage.status
+'delivered'
+>>> updatedMessage.date_sent
+datetime.datetime(2019, 7, 8, 1, 36, 18)
