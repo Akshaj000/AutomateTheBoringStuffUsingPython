@@ -1,0 +1,229 @@
+time module
+
+>>> import time
+>>> time.time()
+1640614694.9615884
+>>>
+The return value is how many seconds have passed between the Unix epoch and the moment time.time() was called.
+
+>>> import time
+>>> time.ctime()
+'Mon Jun 15 14:00:38 2020'
+>>> thisMoment = time.time()
+>>> time.ctime(thisMoment)
+'Mon Jun 15 14:00:45 2020'
+
+time.sleep()
+
+>>> import time
+>>> for i in range(3):
+        print('Tick')
+        time.sleep(1)
+        print('Tock')
+        time.sleep(1)
+
+Tick
+Tock
+Tick
+Tock
+Tick
+Tock
+>>> time.sleep(5)
+
+RoundingNumbers
+
+>>> import time
+>>> now = time.time()
+>>> now
+1543814036.6147408
+>>> round(now, 2)
+1543814036.61
+>>> round(now, 4)
+1543814036.6147
+>>> round(now)
+1543814037
+
+Datetime module
+
+>>> import datetime
+>>> datetime.datetime.now()
+datetime.datetime(2021, 12, 27, 20, 55, 3, 51553)
+>>> dt = datetime.datetime(2019,10,21,16,29,0)
+>>> dt.year, dt.month, dt.day
+(2019, 10, 21)
+>>> dt.hour, dt.minute, dt.second
+(16, 29, 0)
+
+>>> datetime.datetime.fromtimestamp(1000000)
+datetime.datetime(1970, 1, 12, 5, 46, 40)
+>>> datetime.datetime.fromtimestamp(time.time())
+datetime.datetime(2019, 10, 21, 16, 30, 0, 604980)
+
+>>> halloween2019 = datetime.datetime(2019, 10, 31, 0, 0, 0)
+>>> newyears2020 = datetime.datetime(2020, 1, 1, 0, 0, 0)
+>>> oct31_2019 = datetime.datetime(2019, 10, 31, 0, 0, 0)
+>>> halloween2019 == oct31_2019
+True
+>>> halloween2019 > newyears2020
+False
+>>> newyears2020 > halloween2019
+True
+>>> newyears2020 != oct31_2019
+True
+
+timedelta data type
+
+>>> delta = datetime.timedelta(days=11, hours=10, minutes=9, seconds=8)
+>>> delta.days, delta.seconds, delta.microseconds
+(11, 36548, 0)
+>>> delta.total_seconds()
+986948.0
+>>> str(delta)
+'11 days, 10:09:08'
+
+>>> dt = datetime.datetime.now()
+>>> dt
+datetime.datetime(2018, 12, 2, 18, 38, 50, 636181)
+>>> thousandDays = datetime.timedelta(days=1000)
+>>> dt + thousandDays
+datetime.datetime(2021, 8, 28, 18, 38, 50, 636181)
+
+
+>>> oct21st = datetime.datetime(2019, 10, 21, 16, 29, 0)
+>>> aboutThirtyYears = datetime.timedelta(days=365 * 30)
+>>> oct21st
+datetime.datetime(2019, 10, 21, 16, 29)
+>>> oct21st - aboutThirtyYears
+datetime.datetime(1989, 10, 28, 16, 29)
+>>> oct21st - (2 * aboutThirtyYears)
+datetime.datetime(1959, 11, 5, 16, 29)
+
+pausing until a specific date
+
+import datetime
+import time
+halloween2016 = datetime.datetime(2016, 10, 31, 0, 0, 0)
+while datetime.datetime.now() < halloween2016:
+    time.sleep(1)
+
+
+strftime() directive
+Meaning
+
+%Y
+Year with century, as in '2014'
+
+%y
+Year without century, '00' to '99' (1970 to 2069)
+
+%m
+Month as a decimal number, '01' to '12'
+
+%B
+Full month name, as in 'November'
+
+%b
+Abbreviated month name, as in 'Nov'
+
+%d
+Day of the month, '01' to '31'
+
+%j
+Day of the year, '001' to '366'
+
+%w
+Day of the week, '0' (Sunday) to '6' (Saturday)
+
+%A
+Full weekday name, as in 'Monday'
+
+%a
+Abbreviated weekday name, as in 'Mon'
+
+%H
+Hour (24-hour clock), '00' to '23'
+
+%I
+Hour (12-hour clock), '01' to '12'
+
+%M
+Minute, '00' to '59'
+
+%S
+Second, '00' to '59'
+
+%p
+'AM' or 'PM'
+
+%%
+Literal '%' character
+
+>>> oct21st = datetime.datetime(2019, 10, 21, 16, 29, 0)
+>>> oct21st.strftime('%Y/%m/%d %H:%M:%S')
+'2019/10/21 16:29:00'
+>>> oct21st.strftime('%I:%M %p')
+'04:29 PM'
+>>> oct21st.strftime("%B of '%y")
+"October of '19"
+
+converting string to date and timr obj
+
+>>> datetime.datetime.strptime('October 21, 2019', '%B %d, %Y')
+datetime.datetime(2019, 10, 21, 0, 0)
+>>> datetime.datetime.strptime('2019/10/21 16:29:00', '%Y/%m/%d %H:%M:%S')
+datetime.datetime(2019, 10, 21, 16, 29)
+>>> datetime.datetime.strptime("October of '19", "%B of '%y")
+datetime.datetime(2019, 10, 1, 0, 0)
+>>> datetime.datetime.strptime("November of '63", "%B of '%y")
+datetime.datetime(2063, 11, 1, 0, 0)
+
+
+Multithreading
+
+import time, datetime
+
+startTime = datetime.datetime(2029, 10, 31, 0, 0, 0)
+while datetime.datetime.now() < startTime:
+    time.sleep(1)
+
+print('Program now starting on Halloween 2029')
+--snip--
+
+
+
+
+Passing Arguements to the Threads target function
+
+>>> print('Cats', 'Dogs', 'Frogs', sep=' & ')
+Cats & Dogs & Frogs
+>>> import threading
+>>> threadObj = threading.Thread(target=print, args=['Cats', 'Dogs', 'Frogs'],kwargs={'sep': ' & '})
+>>> threadObj.start()
+Cats & Dogs & Frogs
+
+
+Launching other programing from python
+
+>>> import subprocess
+>>> subprocess.Popen('/usr/bin/gnome-calculator')
+<Popen: returncode: None args: '/usr/bin/gnome-calculator'>
+
+Passing Command Line Arguments to the Popen() Function
+
+>>> subprocess.Popen(['/usr/bin/gnome-text-editor', 'chapterseventeen/notes.txt'])
+<Popen: returncode: None args: ['/usr/bin/gnome-text-editor', 'chaptersevent...>
+
+Running Other Python Scripts
+
+>>> subprocess.Popen(['/usr/bin/python3.8', 'chapterseventeen/checkcoderuntime.py'])
+<subprocess.Popen object at 0x000000000331CF28>
+
+Opening Files with Default Applications
+
+>>> fileObj = open('hello.txt', 'w')
+>>> fileObj.write('Hello, world!')
+12
+>>> fileObj.close()
+>>> import subprocess
+>>> subprocess.Popen(['see', 'chapterseventeen/notes.txt'])
+
