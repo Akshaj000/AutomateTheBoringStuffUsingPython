@@ -1,0 +1,56 @@
+
+Practice Questions
+
+1. Write an assert statement that triggers an AssertionError if the variable spam is an integer less than 10.
+
+   assert spam >= 10, 'The spam variable < 10.'
+
+2. Write an assert statement that triggers an AssertionError if the variables eggs and bacon contain strings 
+   that are the same as each other, even if their cases are different (that is, 'hello' and 'hello' are considered 
+   the same, and 'goodbye' and 'GOODbye' are also considered the same).
+
+    assert eggs.lower() != bacon.lower() 'Eggs and bacon has the same String value.'
+
+3. Write an assert statement that always triggers an AssertionError.
+
+   assert False, 'AssertionError'
+
+4. What are the two lines that your program must have in order to be able to call logging.debug()?
+
+   import logging
+   logging.basicConfig(level=logging.DEBUG, format=' %(asctime)s -%(levelname)s -  %(message)s')
+
+5. What are the two lines that your program must have in order to have logging.debug() send a logging message to a file named programLog.txt?
+
+   import logging
+   logging.basicConfig(filename='programLog.txt', level=logging.DEBUG,format=' %(asctime)s -  %(levelname)s -  %(message)s')
+
+6. What are the five logging levels?
+   
+   debug, info, warning, error, and critical.
+
+7. What line of code can you add to disable all logging messages in your program?
+
+  logging.disable(logging.CRITICAL)
+
+8. Why is using logging messages better than using print() to display the same message?
+
+   Ability to selectively disable logging message. print() can cause confusions. 
+
+9. What are the differences between the Step Over, Step In, and Step Out buttons in the debugger?
+  
+   Ok i used vs code for this . but yeah they are to move debugger in and out of function call.
+   stepin button execute func witthout stepping inside the function.
+   stepout execute rest of the codes until it steps out of the func.
+
+10. After you click Continue, when will the debugger stop?
+
+   when it reaches the breaking point.
+
+11. What is a breakpoint?
+
+    the line of code that cause debugger to pause the program executuion.
+
+12. How do you set a breakpoint on a line of code in Mu?
+
+    adding a red dot to the left of line near line no in vscode.
