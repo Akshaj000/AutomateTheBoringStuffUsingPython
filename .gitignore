@@ -1,8 +1,9 @@
 /.vscode
 /.gitignore
-/chaptereighteen/credentials.json
-/chaptereighteen/token.json
-/chapterfourteen/credentials-sheets.json
-/chapterfourteen/token-drive.pickle
-/chapterfourteen/token-sheets.pickle
-/chaptereighteen/credentials.py
+/Chapter_18/credentials.json
+/Chapter_18/token.json
+/Chapter_14/credentials-sheets.json
+/Chapter_14/token-drive.pickle
+/Chapter_14/token-sheets.pickle
+/Chapter_18/credentials.py
+/Chapter_18/Projects/credentials.py
