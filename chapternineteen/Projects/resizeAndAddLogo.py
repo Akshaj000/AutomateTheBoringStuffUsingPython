@@ -5,7 +5,7 @@
 import os
 from PIL import Image
 
-SQUARE_FIT_SIZE = 10000
+SQUARE_FIT_SIZE = 1000
 LOGO_FILENAME = 'catlogo.png'
 
 logoIm = Image.open(LOGO_FILENAME)
@@ -35,9 +35,8 @@ for filename in os.listdir('.'):
         print('Resizing %s...' % (filename))
         im = im.resize((width, height))
 
-    # Add logo.
-    print('Adding logo to %s...' % (filename))
-    im.paste(logoIm, (width - logoWidth, height - logoHeight), logoIm)
-
-    # Save changes.
-    im.save(os.path.join('withLogo', filename))
+    imWidth, imHeight = im.size
+    if not imWidth > logoWidth*2  and imHeight > logoHeight*2:
+        im.paste(logoIm, (width - logoWidth, height - logoHeight), logoIm)
+        print("added")
+        im.save(os.path.join('withLogo', filename))
