@@ -131,7 +131,7 @@ starting tls encryption
 (220, b'2.0.0 Ready to start TLS')
 
 logging into the smtp server
-
+    
 >>> smtpObj.login('my_email_address@example.com', 'MY_SECRET_PASSWORD')
 (235, b'2.7.0 Accepted')
 
